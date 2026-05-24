@@ -3,179 +3,278 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Theory of Computation | IOE Hub</title>
-    <!-- Tailwind CSS Engine Link -->
+    <title>IOE Engineering Notes Hub</title>
+    <!-- Tailwind CSS Engine -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; }
+        .code-font { font-family: 'Fira Code', monospace; }
     </style>
 </head>
 <body class="bg-slate-50 min-h-screen text-slate-800 p-6">
 
-    <div class="max-w-5xl mx-auto space-y-6">
+    <div class="max-w-6xl mx-auto space-y-6">
         
         <!-- Top Navigation & Authentication Mock Bar -->
         <div class="bg-white px-6 py-3 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between text-sm">
-            <!-- Website Logo Linked Back to Homepage -->
-            <a href="https://adhungel005-creator.github.io/testkitp2/" class="flex items-center space-x-2 font-bold text-slate-900 hover:opacity-80 transition">
-                <div class="w-7 h-7 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">i</div>
-                <span>IOE Notes Hub</span>
-            </a>
+            <div class="flex items-center space-x-6">
+                <a href="https://adhungel005-creator.github.io/testkitp2/" class="flex items-center space-x-2 font-bold text-slate-900 hover:opacity-80 transition">
+                    <div class="w-7 h-7 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">i</div>
+                    <span>IOE Notes Hub</span>
+                </a>
+                
+                <!-- Faculty Subject Toggles -->
+                <nav class="hidden md:flex items-center space-x-1 bg-slate-100 p-1 rounded-lg text-xs font-medium text-slate-600">
+                    <button id="btn-toc" onclick="switchSubject('toc')" class="px-3 py-1.5 rounded-md bg-white text-slate-900 shadow-sm transition">Theory of Computation</button>
+                    <button id="btn-nm" onclick="switchSubject('nm')" class="px-3 py-1.5 rounded-md hover:text-slate-900 transition">Numerical Methods</button>
+                </nav>
+            </div>
             
             <div>
                 <div id="auth-status" class="flex items-center space-x-2">
                     <span class="text-xs text-slate-500 mr-2">Want to contribute notes?</span>
-                    <button onclick="simulateLogin()" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-lg font-medium transition text-xs shadow-sm shadow-blue-100">Simulate Student Sign Up / Login</button>
+                    <button onclick="simulateLogin()" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-lg font-medium transition text-xs shadow-sm shadow-blue-100">Simulate Student Sign Up</button>
                 </div>
             </div>
         </div>
 
-        <!-- Course Banner Card -->
-        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-            <span class="text-xs font-bold text-blue-600 uppercase tracking-wide">Computer Engineering (BCT) • Year II / Part I (2080 Onwards)</span>
-            <h1 class="text-3xl font-extrabold text-slate-900 mt-1">Theory of Computation</h1>
-            <p class="text-sm text-slate-500 mt-1">Course Code: <span class="font-mono bg-slate-100 px-1.5 py-0.5 rounded text-slate-700">CT 203</span> | Scheme: <span class="font-semibold text-slate-800">60 Marks</span> Final Exam Weightage</p>
-        </div>
-
-        <!-- 3-Column Interface Layout Grid -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            
-            <!-- Left Grid Pane: Syllabus Chapters Table (Takes up 2/3 space) -->
-            <div class="lg:col-span-2 bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden h-fit">
-                <div class="px-5 py-4 border-b border-slate-100 bg-slate-50/50">
-                    <h3 class="font-bold text-slate-900 text-sm">Syllabus Structure Breakdown</h3>
-                </div>
-                <table class="w-full text-left border-collapse text-sm">
-                    <thead>
-                        <tr class="bg-slate-50 border-b border-slate-200 text-xs uppercase font-bold text-slate-500">
-                            <th class="p-4 w-12 text-center">Unit</th>
-                            <th class="p-4">Chapter Specification</th>
-                            <th class="p-4 text-right w-32">Exam Marks</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-slate-100">
-                        <tr class="hover:bg-slate-50/50 transition">
-                            <td class="p-4 font-mono text-slate-400 text-center">01</td>
-                            <td class="p-4 font-semibold text-slate-900">Introduction to Finite Automata & Regular Languages</td>
-                            <td class="p-4 text-right"><span class="bg-blue-50 text-blue-700 px-2 py-0.5 rounded text-xs font-bold">14 Marks</span></td>
-                        </tr>
-                        <tr class="hover:bg-slate-50/50 transition">
-                            <td class="p-4 font-mono text-slate-400 text-center">02</td>
-                            <td class="p-4 font-semibold text-slate-900">Context Free Languages & Pushdown Automata</td>
-                            <td class="p-4 text-right"><span class="bg-blue-50 text-blue-700 px-2 py-0.5 rounded text-xs font-bold">16 Marks</span></td>
-                        </tr>
-                        <tr class="hover:bg-slate-50/50 transition">
-                            <td class="p-4 font-mono text-slate-400 text-center">03</td>
-                            <td class="p-4 font-semibold text-slate-900">Turing Machines & Computability Theory</td>
-                            <td class="p-4 text-right"><span class="bg-blue-50 text-blue-700 px-2 py-0.5 rounded text-xs font-bold">18 Marks</span></td>
-                        </tr>
-                        <tr class="hover:bg-slate-50/50 transition">
-                            <td class="p-4 font-mono text-slate-400 text-center">04</td>
-                            <td class="p-4 font-semibold text-slate-900">Chomsky Hierarchy & Computational Complexity</td>
-                            <td class="p-4 text-right"><span class="bg-blue-50 text-blue-700 px-2 py-0.5 rounded text-xs font-bold">12 Marks</span></td>
-                        </tr>
-                    </tbody>
-                </table>
+        <!-- ================= SUBJECT AREA 1: THEORY OF COMPUTATION ================= -->
+        <div id="section-toc" class="space-y-6">
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                <span class="text-xs font-bold text-blue-600 uppercase tracking-wide">Computer Engineering (BCT) • Year I / Part II</span>
+                <h1 class="text-3xl font-extrabold text-slate-900 mt-1">Theory of Computation</h1>
+                <p class="text-sm text-slate-500 mt-1">Course Code: <span class="font-mono bg-slate-100 px-1.5 py-0.5 rounded text-slate-700">CT 203</span> | Scheme: <span class="font-semibold text-slate-800">80 Marks</span> Board Exam</p>
             </div>
 
-            <!-- Right Grid Pane: Downloads Sidebar & Submission Forms -->
-            <div class="space-y-6">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-2 bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden h-fit">
+                    <table class="w-full text-left border-collapse text-sm">
+                        <thead>
+                            <tr class="bg-slate-50 border-b border-slate-200 text-xs uppercase font-bold text-slate-500">
+                                <th class="p-4 w-12 text-center">Unit</th>
+                                <th class="p-4">Chapter Specification Blueprint</th>
+                                <th class="p-4 text-right w-32">Exam Marks</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr class="hover:bg-slate-50/50 transition"><td class="p-4 font-mono text-slate-400 text-center">01</td><td class="p-4 font-semibold text-slate-900">Introduction to Finite Automata & Regular Languages</td><td class="p-4 text-right"><span class="bg-blue-50 text-blue-700 px-2 py-0.5 rounded text-xs font-bold">14 Marks</span></td></tr>
+                            <tr class="hover:bg-slate-50/50 transition"><td class="p-4 font-mono text-slate-400 text-center">02</td><td class="p-4 font-semibold text-slate-900">Context Free Languages & Pushdown Automata</td><td class="p-4 text-right"><span class="bg-blue-50 text-blue-700 px-2 py-0.5 rounded text-xs font-bold">16 Marks</span></td></tr>
+                            <tr class="hover:bg-slate-50/50 transition"><td class="p-4 font-mono text-slate-400 text-center">03</td><td class="p-4 font-semibold text-slate-900">Turing Machines & Computability Theory</td><td class="p-4 text-right"><span class="bg-blue-50 text-blue-700 px-2 py-0.5 rounded text-xs font-bold">18 Marks</span></td></tr>
+                            <tr class="hover:bg-slate-50/50 transition"><td class="p-4 font-mono text-slate-400 text-center">04</td><td class="p-4 font-semibold text-slate-900">Chomsky Hierarchy & Computational Complexity</td><td class="p-4 text-right"><span class="bg-blue-50 text-blue-700 px-2 py-0.5 rounded text-xs font-bold">12 Marks</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="toc-sidebar-placeholder" class="space-y-6"></div>
+            </div>
+        </div>
+
+        <!-- ================= SUBJECT AREA 2: NUMERICAL METHODS ================= -->
+        <div id="section-nm" class="space-y-6 hidden">
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <span class="text-xs font-bold text-emerald-600 uppercase tracking-wide">Engineering Curriculum Reference Materials</span>
+                    <h1 class="text-3xl font-extrabold text-slate-900 mt-1">Numerical Methods</h1>
+                    <p class="text-sm text-slate-500 mt-1">Syllabus Guide Summary • Contributed Reference: <span class="font-medium text-slate-700">Er. Rubi Kumari Mahato</span></p>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-600 max-w-sm">
+                    <strong>Stopping Rule Insight:</strong> Iterations terminate when $|x_{n+1}-x_n| < \epsilon$ or $|f(x_n)| < \epsilon$.
+                </div>
+            </div>
+
+            <!-- Main Content Area: Tabulated Solutions & Python Implementations -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-2 space-y-6">
+                    
+                    <!-- Section 1: Non-Linear Equations -->
+                    <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+                        <div class="bg-slate-50 px-5 py-3 border-b border-slate-200 flex items-center justify-between">
+                            <h3 class="font-bold text-slate-900 text-sm">Unit 1: Solution of Non-Linear Equations</h3>
+                            <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded">Bracketing & Open Methods</span>
+                        </div>
+                        <div class="p-5 space-y-4 text-xs leading-relaxed">
+                            <p>Numerical calculations approximate structural limits using precise metric convergence models:</p>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 bg-slate-50 p-3 rounded-lg font-mono text-[11px]">
+                                <div><strong>Absolute Error:</strong><br> $E_a = |Approx - True|$</div>
+                                <div><strong>Relative Error:</strong><br> $E_r = \frac{E_a}{|True|}$</div>
+                                <div><strong>Percentage Error:</strong><br> $E_p = E_r \times 100$</div>
+                            </div>
+                            
+                            <!-- Bisection Method Code Accordion -->
+                            <div class="border border-slate-200 rounded-lg overflow-hidden">
+                                <div class="bg-slate-50/80 px-4 py-2.5 font-semibold text-slate-800 flex justify-between items-center border-b border-slate-200">
+                                    <span>🤖 Bisection Method Script Implementation ($c = \frac{a+b}{2}$)</span>
+                                </div>
+                                <pre class="p-4 bg-slate-900 text-slate-200 text-[11px] overflow-x-auto code-font">
+def bisection(f, a, b, tol=1e-6):
+    if f(a) * f(b) > 0:
+        return "Root not bracketed."
+    while (b - a) / 2.0 > tol:
+        c = (a + b) / 2.0
+        if f(c) == 0: return c
+        elif f(a) * f(c) < 0: b = c
+        else: a = c
+    return (a + b) / 2.0</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section 3: Curve Fitting -->
+                    <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+                        <div class="bg-slate-50 px-5 py-3 border-b border-slate-200">
+                            <h3 class="font-bold text-slate-900 text-sm">Unit 3: Interpolation & Least Square Curve Fitting</h3>
+                        </div>
+                        <div class="p-5 space-y-4 text-xs leading-relaxed">
+                            <p><strong>Cubic Spline Curve Fitting:</strong> Provides a unique, smooth localized interpolation between consecutive endpoints. For equally spaced coordinates, it utilizes the secondary derivative relation:</p>
+                            <div class="bg-slate-50 p-3 rounded-lg font-mono text-center text-slate-700 text-[11px] border border-slate-100">
+                                $K_{i-1} + 4K_i + K_{i+1} = \frac{6}{h^2}(y_{i-1} - 2y_i + y_{i+1})$
+                            </div>
+                            <p><strong>Linear Regression Models:</strong> Fits experimental coordinates to straight paths ($y = a + bx$) using the least-square normal calculation system:</p>
+                            <div class="bg-slate-50 p-3 rounded-lg font-mono text-[11px] space-y-1">
+                                <div>$\sum y_i = na + b \sum x_i$</div>
+                                <div>$\sum x_i y_i = a \sum x_i + b \sum x_i^2$</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
                 
-                <!-- Downloads Sidebar Container -->
+                <!-- Shared Right Sidebar Target -->
+                <div id="nm-sidebar-placeholder" class="space-y-6"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- UI Management and Application State JavaScript Logic -->
+    <script>
+        // Central Repository State Data List Object
+        let state = {
+            isLoggedIn: false,
+            resources: [
+                { subject: 'toc', type: 'Official Syllabus', title: 'IOE New Course Curriculum PDF' },
+                { subject: 'toc', type: 'Past Question', title: '2081 Regular Board Solutions' },
+                { subject: 'nm', type: 'Reference Sheet', title: 'Unit 1 & 3 Finite Differences Guide - Er. Rubi' },
+                { subject: 'nm', type: 'Past Question', title: '2080 Numerical Analysis Final Solutions' }
+            ]
+        };
+
+        // Handles conditional presentation view swapping
+        function switchSubject(subjectCode) {
+            const tocSec = document.getElementById('section-toc');
+            const nmSec = document.getElementById('section-nm');
+            const btnToc = document.getElementById('btn-toc');
+            const btnNm = document.getElementById('btn-nm');
+
+            if(subjectCode === 'toc') {
+                tocSec.classList.remove('hidden');
+                nmSec.classList.add('hidden');
+                btnToc.className = "px-3 py-1.5 rounded-md bg-white text-slate-900 shadow-sm transition";
+                btnNm.className = "px-3 py-1.5 rounded-md hover:text-slate-900 transition";
+            } else {
+                tocSec.classList.add('hidden');
+                nmSec.classList.remove('hidden');
+                btnNm.className = "px-3 py-1.5 rounded-md bg-white text-emerald-900 shadow-sm transition";
+                btnToc.className = "px-3 py-1.5 rounded-md hover:text-slate-900 transition";
+            }
+            renderSidebars();
+        }
+
+        // Simulates the authentication state switch loop
+        function simulateLogin() {
+            state.isLoggedIn = true;
+            document.getElementById('auth-status').innerHTML = `
+                <div class="flex items-center space-x-3 text-xs">
+                    <span class="text-slate-600">🎓 Welcome, <strong class="text-slate-900">Student Reviewer</strong></span>
+                    <button onclick="location.reload()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-2.5 py-1.5 rounded-lg font-medium transition">Logout</button>
+                </div>
+            `;
+            renderSidebars();
+        }
+
+        // Assembles sidebar instances matching structural subject views dynamically
+        function renderSidebars() {
+            const currentSubject = document.getElementById('section-toc').classList.contains('hidden') ? 'nm' : 'toc';
+            const targetContainerId = currentSubject === 'toc' ? 'toc-sidebar-placeholder' : 'nm-sidebar-placeholder';
+            const alternativeContainerId = currentSubject === 'toc' ? 'nm-sidebar-placeholder' : 'toc-sidebar-placeholder';
+            
+            // Clear alternative view layout tree
+            document.getElementById(alternativeContainerId).innerHTML = "";
+
+            const filteredResources = state.resources.filter(r => r.subject === currentSubject);
+            
+            let resourceCardsHTML = '';
+            filteredResources.forEach(res => {
+                resourceCardsHTML += `
+                    <div class="border border-slate-100 rounded-xl p-3.5 bg-slate-50/50 hover:border-slate-200 transition">
+                        <span class="text-[10px] uppercase font-extrabold tracking-wider text-amber-700 block mb-1">${res.type}</span>
+                        <h4 class="text-xs font-bold text-slate-800 mb-2.5">${res.title}</h4>
+                        <a href="#" class="block text-center bg-slate-900 hover:bg-slate-800 text-white text-xs font-medium py-1.5 px-3 rounded-lg transition shadow-sm">Download Resource</a>
+                    </div>
+                `;
+            });
+
+            let portalFormHTML = '';
+            if (state.isLoggedIn) {
+                portalFormHTML = `
+                    <p class="text-[11px] text-slate-500 mb-3 leading-relaxed">Publish new PDF handouts into the live active view feed list below.</p>
+                    <div class="space-y-3">
+                        <div>
+                            <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Asset Category</label>
+                            <select id="asset_type" class="w-full text-xs p-2 border border-slate-200 rounded-lg bg-slate-50 focus:outline-none">
+                                <option value="Handwritten Note">Handwritten Note</option>
+                                <option value="Lab Guide">Lab Reference Guide</option>
+                                <option value="Past Question">Past Question Solution</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Document Title Name</label>
+                            <input type="text" id="asset_title" required placeholder="e.g., Unit 3 Divided Differences Notes" class="w-full text-xs p-2 border border-slate-200 rounded-lg focus:outline-none">
+                        </div>
+                        <button onclick="addResource('${currentSubject}')" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-2 rounded-lg transition shadow-sm">Publish Resource</button>
+                    </div>
+                `;
+            } else {
+                portalFormHTML = `
+                    <div class="bg-slate-50 border border-dashed border-slate-200 rounded-xl p-4 text-center">
+                        <p class="text-xs text-slate-500 leading-relaxed mb-3">You must be registered and authenticated as an authorized student contributor to upload materials.</p>
+                        <button onclick="simulateLogin()" class="inline-block text-xs text-blue-600 font-semibold hover:underline">Sign In Now &rarr;</button>
+                    </div>
+                `;
+            }
+
+            document.getElementById(targetContainerId).innerHTML = `
                 <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
                     <h3 class="font-bold text-slate-900 mb-3 text-sm flex items-center justify-between border-b border-slate-100 pb-2">
                         <span>Course Reference Assets</span>
                     </h3>
-                    <div id="resource-list" class="space-y-3">
-                        <!-- Default PDF Asset 1 -->
-                        <div class="border border-slate-100 rounded-xl p-3.5 bg-slate-50/50 hover:border-slate-300 transition">
-                            <span class="text-[10px] uppercase font-extrabold tracking-wider text-amber-700 block mb-1">Official Syllabus</span>
-                            <h4 class="text-xs font-bold text-slate-800 mb-2.5">IOE New Course Curriculum PDF</h4>
-                            <a href="#" class="block text-center bg-slate-900 hover:bg-slate-800 text-white text-xs font-medium py-2 px-3 rounded-lg transition shadow-sm">Download PDF</a>
-                        </div>
-                        <!-- Default PDF Asset 2 -->
-                        <div class="border border-slate-100 rounded-xl p-3.5 bg-slate-50/50 hover:border-slate-300 transition">
-                            <span class="text-[10px] uppercase font-extrabold tracking-wider text-amber-700 block mb-1">Past Question</span>
-                            <h4 class="text-xs font-bold text-slate-800 mb-2.5">2081 Regular Board Solutions</h4>
-                            <a href="#" class="block text-center bg-slate-900 hover:bg-slate-800 text-white text-xs font-medium py-2 px-3 rounded-lg transition shadow-sm">Download PDF</a>
-                        </div>
-                    </div>
+                    <div id="resource-list" class="space-y-3">${resourceCardsHTML}</div>
                 </div>
 
-                <!-- Community Contribution Form Container -->
                 <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
                     <h3 class="font-bold text-slate-900 text-sm mb-1 flex items-center">
                         <span class="w-1.5 h-3.5 bg-emerald-500 rounded-full mr-2"></span> Community Upload Portal
                     </h3>
-                    <div id="portal-box" class="mt-3">
-                        <!-- Locked State Alert Content Box -->
-                        <div class="bg-slate-50 border border-dashed border-slate-200 rounded-xl p-4 text-center">
-                            <p class="text-xs text-slate-500 leading-relaxed mb-3">You must be registered and authenticated as an authorized student reviewer to upload study materials here.</p>
-                            <button onclick="simulateLogin()" class="inline-block text-xs text-blue-600 font-semibold hover:underline">Sign In Now &rarr;</button>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-
-    <!-- Frontend Interactive Script Configurations -->
-    <script>
-        // Triggers the authenticated state mockup UI changes
-        function simulateLogin() {
-            document.getElementById('auth-status').innerHTML = `
-                <div class="flex items-center space-x-4">
-                    <span class="text-slate-600 text-xs">🎓 Welcome, <strong class="text-slate-900">Student Contributor</strong></span>
-                    <button onclick="location.reload()" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-2.5 py-1.5 rounded-lg font-medium transition">Logout</button>
-                </div>
-            `;
-            
-            document.getElementById('portal-box').innerHTML = `
-                <p class="text-[11px] text-slate-500 mb-4 leading-relaxed">Add your handwritten reference notes or past examination guidelines directly to the live feed layer view below.</p>
-                <div class="space-y-3.5">
-                    <div>
-                        <label class="block text-[10px] font-extrabold text-slate-500 uppercase tracking-wide mb-1">Asset Category</label>
-                        <select id="asset_type" class="w-full text-xs p-2 border border-slate-200 rounded-lg bg-slate-50 focus:border-blue-600 focus:outline-none">
-                            <option value="Handwritten Note">Handwritten Note Copy</option>
-                            <option value="Past Question">Past Question Solution</option>
-                            <option value="Lab Report">Lab Architecture Guide</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-extrabold text-slate-500 uppercase tracking-wide mb-1">Document Title</label>
-                        <input type="text" id="asset_title" required placeholder="e.g., Chapter 2 Turing Machines Guide" class="w-full text-xs p-2 border border-slate-200 rounded-lg focus:border-blue-600 focus:outline-none">
-                    </div>
-                    <button onclick="addResource()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-2 rounded-lg transition shadow-sm shadow-emerald-100">Publish to Main Board</button>
+                    <div id="portal-box" class="mt-3">${portalFormHTML}</div>
                 </div>
             `;
         }
 
-        // Dynamically appends user submitted assets straight into the sidebar
-        function addResource() {
+        // Dynamically pushes a new document object into global array framework view
+        function addResource(subj) {
             const type = document.getElementById('asset_type').value;
             const title = document.getElementById('asset_title').value;
             
-            if(!title.trim()) {
-                alert("Please type out a legitimate document name title before uploading.");
-                return;
-            }
+            if(!title.trim()) return alert("Please type out a legitimate document name title.");
 
-            const container = document.getElementById('resource-list');
-            const card = document.createElement('div');
-            card.className = "border border-slate-100 rounded-xl p-3.5 bg-slate-50/50 hover:border-slate-300 transition animate-fadeIn";
-            card.innerHTML = `
-                <span class="text-[10px] uppercase font-extrabold tracking-wider text-emerald-700 block mb-1">${type}</span>
-                <h4 class="text-xs font-bold text-slate-800 mb-2.5">${title}</h4>
-                <a href="#" class="block text-center bg-slate-900 hover:bg-slate-800 text-white text-xs font-medium py-2 px-3 rounded-lg transition shadow-sm">Download PDF</a>
-            `;
-            
-            // Appends card directly into the current viewing DOM container
-            container.appendChild(card);
-            document.getElementById('asset_title').value = "";
+            state.resources.push({ subject: subj, type: type, title: title });
+            renderSidebars();
         }
+
+        // Run baseline setup render engine configuration on window boot load
+        window.onload = function() {
+            renderSidebars();
+        };
     </script>
 </body>
 </html>
