@@ -14,9 +14,9 @@
 </head>
 <body class="bg-slate-50 min-h-screen text-slate-800 p-6">
 
-    <div class="max-w-6xl mx-auto space-y-6">
+    <div class="max-w-7xl mx-auto space-y-6">
         
-        <!-- Top Navigation & Authentication Mock Bar -->
+        <!-- Top Navigation Bar -->
         <div class="bg-white px-6 py-3 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between text-sm">
             <div class="flex items-center space-x-6">
                 <a href="https://adhungel005-creator.github.io/testkitp2/" class="flex items-center space-x-2 font-bold text-slate-900 hover:opacity-80 transition">
@@ -24,7 +24,6 @@
                     <span>IOE Notes Hub</span>
                 </a>
                 
-                <!-- Faculty Subject Toggles -->
                 <nav class="hidden md:flex items-center space-x-1 bg-slate-100 p-1 rounded-lg text-xs font-medium text-slate-600">
                     <button id="btn-toc" onclick="switchSubject('toc')" class="px-3 py-1.5 rounded-md bg-white text-slate-900 shadow-sm transition">Theory of Computation</button>
                     <button id="btn-nm" onclick="switchSubject('nm')" class="px-3 py-1.5 rounded-md hover:text-slate-900 transition">Numerical Methods</button>
@@ -73,93 +72,166 @@
         <div id="section-nm" class="space-y-6 hidden">
             <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
-                    <span class="text-xs font-bold text-emerald-600 uppercase tracking-wide">Engineering Curriculum Reference Materials</span>
+                    <span class="text-xs font-bold text-emerald-600 uppercase tracking-wide">Complete Merged Workbook Database Repository</span>
                     <h1 class="text-3xl font-extrabold text-slate-900 mt-1">Numerical Methods</h1>
-                    <p class="text-sm text-slate-500 mt-1">Syllabus Guide Summary • Contributed Reference: <span class="font-medium text-slate-700">Er. Rubi Kumari Mahato</span></p>
-                </div>
-                <div class="bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-600 max-w-sm">
-                    <strong>Stopping Rule Insight:</strong> Iterations terminate when $|x_{n+1}-x_n| < \epsilon$ or $|f(x_n)| < \epsilon$.
+                    <p class="text-sm text-slate-500 mt-1">Course Compilation Materials • Prepared By: <span class="font-semibold text-slate-700">Er. Rubi Kumari Mahato</span></p>
                 </div>
             </div>
 
-            <!-- Main Content Area: Tabulated Solutions & Python Implementations -->
+            <!-- Full Grid Layout for the complete notes book docx framework -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <div class="lg:col-span-2 space-y-6">
                     
-                    <!-- Section 1: Non-Linear Equations -->
+                    <!-- MODULE 1: NON-LINEAR EQUATIONS -->
                     <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
                         <div class="bg-slate-50 px-5 py-3 border-b border-slate-200 flex items-center justify-between">
-                            <h3 class="font-bold text-slate-900 text-sm">Unit 1: Solution of Non-Linear Equations</h3>
-                            <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded">Bracketing & Open Methods</span>
+                            <h3 class="font-bold text-slate-900 text-sm">Unit 1: Numerical Solutions of Non-Linear Equations</h3>
                         </div>
                         <div class="p-5 space-y-4 text-xs leading-relaxed">
-                            <p>Numerical calculations approximate structural limits using precise metric convergence models:</p>
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 bg-slate-50 p-3 rounded-lg font-mono text-[11px]">
-                                <div><strong>Absolute Error:</strong><br> $E_a = |Approx - True|$</div>
-                                <div><strong>Relative Error:</strong><br> $E_r = \frac{E_a}{|True|}$</div>
-                                <div><strong>Percentage Error:</strong><br> $E_p = E_r \times 100$</div>
+                            <h4 class="font-bold text-slate-800 text-sm border-l-2 border-emerald-500 pl-2">Errors and Accuracy Criteria</h4>
+                            <ul class="list-disc pl-5 space-y-1 text-slate-600">
+                                <li><strong>Absolute Error:</strong> $E_a = |Approximate Value - True Value|$</li>
+                                <li><strong>Relative Error:</strong> $E_r = \frac{E_a}{|True Value|}$</li>
+                                <li><strong>Percentage Error:</strong> $E_p = E_r \times 100$</li>
+                                <li><strong>Stopping Conditions:</strong> Terminate calculations when successive iterations agree within standard error limit $|x_{n+1} - x_n| < \epsilon$ or $|f(x_n)| < \epsilon$.</li>
+                            </ul>
+
+                            <h4 class="font-bold text-slate-800 text-sm border-l-2 border-emerald-500 pl-2 pt-2">1.5 Newton-Raphson Method (Tangent Line Approximation)</h4>
+                            <p>Approximates the root of an equation using sequential localized tangent derivatives down until convergence:</p>
+                            <div class="bg-slate-50 p-2.5 rounded font-mono text-center text-slate-700 text-[11px]">
+                                $x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}, \text{ where } f'(x_n) \neq 0$
                             </div>
-                            
-                            <!-- Bisection Method Code Accordion -->
+
                             <div class="border border-slate-200 rounded-lg overflow-hidden">
-                                <div class="bg-slate-50/80 px-4 py-2.5 font-semibold text-slate-800 flex justify-between items-center border-b border-slate-200">
-                                    <span>🤖 Bisection Method Script Implementation ($c = \frac{a+b}{2}$)</span>
-                                </div>
+                                <div class="bg-slate-50 px-4 py-2 font-mono text-[11px] font-bold text-slate-700 border-b border-slate-200">Python Implementation for Newton-Raphson</div>
                                 <pre class="p-4 bg-slate-900 text-slate-200 text-[11px] overflow-x-auto code-font">
-def bisection(f, a, b, tol=1e-6):
-    if f(a) * f(b) > 0:
-        return "Root not bracketed."
-    while (b - a) / 2.0 > tol:
-        c = (a + b) / 2.0
-        if f(c) == 0: return c
-        elif f(a) * f(c) < 0: b = c
-        else: a = c
-    return (a + b) / 2.0</pre>
+def newton_raphson(f, df, x0, tol=1e-6, max_iter=100):
+    x = x0
+    for i in range(max_iter):
+        fx = f(x)
+        dfx = df(x)
+        if abs(dfx) < 1e-12: return None
+        x_new = x - fx / dfx
+        if abs(x_new - x) < tol:
+            return x_new
+        x = x_new
+    return None</pre>
+                            </div>
+
+                            <h4 class="font-bold text-slate-800 text-sm border-l-2 border-emerald-500 pl-2 pt-2">1.6 Fixed Point Iteration Method</h4>
+                            <p>Rearranges $f(x) = 0$ directly into the structural path map $x = g(x)$. The sequence converges systematically if and only if $|g'(x)| < 1$ within the neighborhood of the targeted calculation root.</p>
+                        </div>
+                    </div>
+
+                    <!-- MODULE 3: INTERPOLATION & CURVE FITTING -->
+                    <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+                        <div class="bg-slate-50 px-5 py-3 border-b border-slate-200">
+                            <h3 class="font-bold text-slate-900 text-sm">Unit 3: Interpolation and Least Square Curve Fitting</h3>
+                        </div>
+                        <div class="p-5 space-y-4 text-xs leading-relaxed">
+                            <h4 class="font-bold text-slate-800 text-sm border-l-2 border-emerald-500 pl-2">3.1 Finite Differences Framework</h4>
+                            <p>Calculates data sequences across equispaced step segments using specific forwarding, backward, and divided operators:</p>
+                            <ul class="list-disc pl-5 space-y-1 text-slate-600">
+                                <li><strong>Forward Operator ($\Delta$):</strong> $\Delta y_i = y_{i+1} - y_i$</li>
+                                <li><strong>Backward Operator ($\nabla$):</strong> $\nabla y_i = y_i - y_{i-1}$</li>
+                                <li><strong>Divided Difference Table (Unequal Spacing):</strong> Used to calculate coefficients without re-running parameters when adding new data points.</li>
+                            </ul>
+
+                            <h4 class="font-bold text-slate-800 text-sm border-l-2 border-emerald-500 pl-2 pt-2">3.2 Cubic Spline Curve Fitting</h4>
+                            <p>Ensures a completely continuous smooth fit across all coordinate transformations. Under natural boundary parameters, outermost limits are fixed to straight paths:</p>
+                            <div class="bg-slate-50 p-2.5 rounded font-mono text-center text-slate-700 text-[11px]">
+                                Natural Spline Boundary Conditions: $K_0 = 0, K_n = 0$
+                            </div>
+
+                            <h4 class="font-bold text-slate-800 text-sm border-l-2 border-emerald-500 pl-2 pt-2">3.3 Least Square Regression Ingestion</h4>
+                            <p>Minimizes deviation error blocks by solving linear equations systematically ($y = a + bx$):</p>
+                            <div class="bg-slate-50 p-3 rounded font-mono text-[11px] space-y-1 text-slate-700">
+                                <div>$b = \frac{n \sum x_i y_i - \sum x_i \sum y_i}{n \sum x_i^2 - (\sum x_i)^2}$</div>
+                                <div>$a = \frac{\sum y_i - b \sum x_i}{n}$</div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Section 3: Curve Fitting -->
+                    <!-- MODULE 5: ORDINARY DIFFERENTIAL EQUATIONS -->
                     <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
                         <div class="bg-slate-50 px-5 py-3 border-b border-slate-200">
-                            <h3 class="font-bold text-slate-900 text-sm">Unit 3: Interpolation & Least Square Curve Fitting</h3>
+                            <h3 class="font-bold text-slate-900 text-sm">Unit 5: Numerical Solution of Ordinary Differential Equations</h3>
                         </div>
                         <div class="p-5 space-y-4 text-xs leading-relaxed">
-                            <p><strong>Cubic Spline Curve Fitting:</strong> Provides a unique, smooth localized interpolation between consecutive endpoints. For equally spaced coordinates, it utilizes the secondary derivative relation:</p>
-                            <div class="bg-slate-50 p-3 rounded-lg font-mono text-center text-slate-700 text-[11px] border border-slate-100">
-                                $K_{i-1} + 4K_i + K_{i+1} = \frac{6}{h^2}(y_{i-1} - 2y_i + y_{i+1})$
+                            <h4 class="font-bold text-slate-800 text-sm border-l-2 border-emerald-500 pl-2">5.1 Initial Value Problems (IVP)</h4>
+                            <p><strong>Euler's Method (1st Order RK-Method):</strong> Updates steps sequentially using the local tangent gradient path ($y_{new} = y + h \cdot f(x,y)$). Requires small step sizes ($h$) to minimize error divergence.</p>
+                            
+                            <p><strong>Runge-Kutta Fourth Order Method (RK4 Classical):</strong> Provides exceptionally high accuracy tracking using four specific weighted slope variations across each interval step:</p>
+                            <div class="bg-slate-50 p-3 rounded font-mono text-[11px] space-y-1 text-slate-600">
+                                <div>$k_1 = h \cdot f(x_n, y_n)$</div>
+                                <div>$k_2 = h \cdot f\left(x_n + \frac{h}{2}, y_n + \frac{k_1}{2}\right)$</div>
+                                <div>$k_3 = h \cdot f\left(x_n + \frac{h}{2}, y_n + \frac{k_2}{2}\right)$</div>
+                                <div>$k_4 = h \cdot f(x_n + h, y_n + k_3)$</div>
+                                <div class="text-slate-900 font-bold mt-1">$y_{n+1} = y_n + \frac{1}{6}(k_1 + 2k_2 + 2k_3 + k_4)$</div>
                             </div>
-                            <p><strong>Linear Regression Models:</strong> Fits experimental coordinates to straight paths ($y = a + bx$) using the least-square normal calculation system:</p>
-                            <div class="bg-slate-50 p-3 rounded-lg font-mono text-[11px] space-y-1">
-                                <div>$\sum y_i = na + b \sum x_i$</div>
-                                <div>$\sum x_i y_i = a \sum x_i + b \sum x_i^2$</div>
+
+                            <h4 class="font-bold text-slate-800 text-sm border-l-2 border-emerald-500 pl-2 pt-2">5.2 Two-Point Boundary Value Problems (BVP)</h4>
+                            <ul class="list-disc pl-5 space-y-2 text-slate-600">
+                                <li><strong>The Shooting Method:</strong> Converts a boundary problem into an initial value problem by guessing the initial slope value ($y'(a) = m$), checking the boundary result at the opposite end, and refining guesses via linear interpolation until the target boundary is met.</li>
+                                <li><strong>Finite Difference Method:</strong> Replaces continuous analytical derivative equations with discrete central finite difference variations to solve problems across multi-point mesh matrices.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- MODULE 6: PARTIAL DIFFERENTIAL EQUATIONS -->
+                    <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+                        <div class="bg-slate-50 px-5 py-3 border-b border-slate-200">
+                            <h3 class="font-bold text-slate-900 text-sm">Unit 6: Solution of Partial Differential Equations (PDEs)</h3>
+                        </div>
+                        <div class="p-5 space-y-4 text-xs leading-relaxed">
+                            <h4 class="font-bold text-slate-800 text-sm border-l-2 border-emerald-500 pl-2">PDE Engineering Classifications</h4>
+                            <p>Categorized according to the standard second-order discriminant system ($B^2 - 4AC$):</p>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                                <div class="bg-slate-50 p-3 rounded border border-slate-200 text-center">
+                                    <span class="font-bold text-slate-800 block text-xs">Elliptic ($B^2-4AC < 0$)</span>
+                                    <span class="text-[11px] text-slate-500">Laplace & Poisson Steady-State Models</span>
+                                </div>
+                                <div class="bg-slate-50 p-3 rounded border border-slate-200 text-center">
+                                    <span class="font-bold text-slate-800 block text-xs">Parabolic ($B^2-4AC = 0$)</span>
+                                    <span class="text-[11px] text-slate-500">1D Heat Equation Smoothing Diffusion</span>
+                                </div>
+                                <div class="bg-slate-50 p-3 rounded border border-slate-200 text-center">
+                                    <span class="font-bold text-slate-800 block text-xs">Hyperbolic ($B^2-4AC > 0$)</span>
+                                    <span class="text-[11px] text-slate-500">Time-dependent Wave Equation Travel</span>
+                                </div>
                             </div>
+
+                            <h4 class="font-bold text-slate-800 text-sm border-l-2 border-emerald-500 pl-2 pt-2">6.4.1 1D Heat Equation Solutions</h4>
+                            <p><strong>Bendre-Schmidt Explicit Method:</strong> Models diffusion over a mesh grid network. To guarantee numerical system convergence and stability, the mesh ratio parameter ($\alpha$) must satisfy the following strict condition:</p>
+                            <div class="bg-slate-50 p-2.5 rounded font-mono text-center text-slate-800 text-[11px]">
+                                Stability Condition: $\alpha = \frac{c^2 \cdot \Delta t}{(\Delta x)^2} \le \frac{1}{2}$
+                            </div>
+                            <p><strong>Crank-Nicolson Implicit Scheme:</strong> An advanced, unconditionally stable method that removes severe time-step constraints by using a tridiagonal equation system across time segments.</p>
                         </div>
                     </div>
 
                 </div>
                 
-                <!-- Shared Right Sidebar Target -->
+                <!-- Shared Sidebars Insertion Point -->
                 <div id="nm-sidebar-placeholder" class="space-y-6"></div>
             </div>
         </div>
 
     </div>
 
-    <!-- UI Management and Application State JavaScript Logic -->
+    <!-- Interface State Machine and Client Action Routing Logic -->
     <script>
-        // Central Repository State Data List Object
+        // Central In-Memory Resource Array Model
         let state = {
             isLoggedIn: false,
             resources: [
                 { subject: 'toc', type: 'Official Syllabus', title: 'IOE New Course Curriculum PDF' },
                 { subject: 'toc', type: 'Past Question', title: '2081 Regular Board Solutions' },
-                { subject: 'nm', type: 'Reference Sheet', title: 'Unit 1 & 3 Finite Differences Guide - Er. Rubi' },
-                { subject: 'nm', type: 'Past Question', title: '2080 Numerical Analysis Final Solutions' }
+                { subject: 'nm', type: 'Workbook Asset', title: 'Students Workbook - Merged Document Copy' },
+                { subject: 'nm', type: 'Syllabus Guide', title: 'Unit 5 & 6 Full Differential Ingestion Specs' }
             ]
         };
 
-        // Handles conditional presentation view swapping
         function switchSubject(subjectCode) {
             const tocSec = document.getElementById('section-toc');
             const nmSec = document.getElementById('section-nm');
@@ -180,7 +252,6 @@ def bisection(f, a, b, tol=1e-6):
             renderSidebars();
         }
 
-        // Simulates the authentication state switch loop
         function simulateLogin() {
             state.isLoggedIn = true;
             document.getElementById('auth-status').innerHTML = `
@@ -192,13 +263,11 @@ def bisection(f, a, b, tol=1e-6):
             renderSidebars();
         }
 
-        // Assembles sidebar instances matching structural subject views dynamically
         function renderSidebars() {
             const currentSubject = document.getElementById('section-toc').classList.contains('hidden') ? 'nm' : 'toc';
             const targetContainerId = currentSubject === 'toc' ? 'toc-sidebar-placeholder' : 'nm-sidebar-placeholder';
             const alternativeContainerId = currentSubject === 'toc' ? 'nm-sidebar-placeholder' : 'toc-sidebar-placeholder';
             
-            // Clear alternative view layout tree
             document.getElementById(alternativeContainerId).innerHTML = "";
 
             const filteredResources = state.resources.filter(r => r.subject === currentSubject);
@@ -229,7 +298,7 @@ def bisection(f, a, b, tol=1e-6):
                         </div>
                         <div>
                             <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Document Title Name</label>
-                            <input type="text" id="asset_title" required placeholder="e.g., Unit 3 Divided Differences Notes" class="w-full text-xs p-2 border border-slate-200 rounded-lg focus:outline-none">
+                            <input type="text" id="asset_title" required placeholder="e.g., Unit 5 RK4 Code Manual" class="w-full text-xs p-2 border border-slate-200 rounded-lg focus:outline-none">
                         </div>
                         <button onclick="addResource('${currentSubject}')" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-2 rounded-lg transition shadow-sm">Publish Resource</button>
                     </div>
@@ -260,7 +329,6 @@ def bisection(f, a, b, tol=1e-6):
             `;
         }
 
-        // Dynamically pushes a new document object into global array framework view
         function addResource(subj) {
             const type = document.getElementById('asset_type').value;
             const title = document.getElementById('asset_title').value;
@@ -271,7 +339,6 @@ def bisection(f, a, b, tol=1e-6):
             renderSidebars();
         }
 
-        // Run baseline setup render engine configuration on window boot load
         window.onload = function() {
             renderSidebars();
         };
