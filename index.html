@@ -3,345 +3,279 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IOE Engineering Notes Hub</title>
-    <!-- Tailwind CSS Engine -->
+    <title>SereneMind Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        brand: {
+                            green: '#638c75', // Main dark green
+                            light: '#e6f0eb', // Light green background for active states
+                            bg: '#f4f7f6', // App background
+                            text: '#2d3748' // Main text color
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        .code-font { font-family: 'Fira Code', monospace; }
+        body { background-color: #f4f7f6; color: #2d3748; }
+        .card-shadow { box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+        /* Hide scrollbar for standard look */
+        ::-webkit-scrollbar { width: 0px; background: transparent; }
     </style>
 </head>
-<body class="bg-slate-50 min-h-screen text-slate-800 p-6">
+<body class="min-h-screen flex flex-col">
 
-    <div class="max-w-7xl mx-auto space-y-6">
+    <header class="bg-white px-8 py-4 flex items-center justify-between border-b border-gray-100 z-10">
+        <div class="flex items-center gap-3">
+            <i class="fa-solid fa-tree text-brand-green text-2xl"></i>
+            <span class="text-xl font-semibold tracking-tight text-gray-900">SereneMind</span>
+        </div>
         
-        <!-- Top Navigation Bar -->
-        <div class="bg-white px-6 py-3 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between text-sm">
-            <div class="flex items-center space-x-6">
-                <a href="https://adhungel005-creator.github.io/testkitp2/" class="flex items-center space-x-2 font-bold text-slate-900 hover:opacity-80 transition">
-                    <div class="w-7 h-7 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">i</div>
-                    <span>IOE Notes Hub</span>
-                </a>
-                
-                <nav class="hidden md:flex items-center space-x-1 bg-slate-100 p-1 rounded-lg text-xs font-medium text-slate-600">
-                    <button id="btn-toc" onclick="switchSubject('toc')" class="px-3 py-1.5 rounded-md bg-white text-slate-900 shadow-sm transition">Theory of Computation</button>
-                    <button id="btn-nm" onclick="switchSubject('nm')" class="px-3 py-1.5 rounded-md hover:text-slate-900 transition">Numerical Methods</button>
-                </nav>
-            </div>
-            
-            <div>
-                <div id="auth-status" class="flex items-center space-x-2">
-                    <span class="text-xs text-slate-500 mr-2">Want to contribute notes?</span>
-                    <button onclick="simulateLogin()" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-lg font-medium transition text-xs shadow-sm shadow-blue-100">Simulate Student Sign Up</button>
+        <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-gray-600">
+            <a href="#" class="bg-brand-light text-brand-green px-4 py-2 rounded-full">Home</a>
+            <a href="#" class="hover:text-brand-green transition-colors">Journal</a>
+            <a href="#" class="hover:text-brand-green transition-colors">Chatbot</a>
+            <a href="#" class="hover:text-brand-green transition-colors">Analytics</a>
+            <a href="#" class="hover:text-brand-green transition-colors">Profile</a>
+            <a href="#" class="hover:text-brand-green transition-colors">Resources</a>
+        </nav>
+
+        <div class="flex items-center gap-6">
+            <div class="flex items-center gap-3 text-sm">
+                <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center text-gray-500 overflow-hidden">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="hidden md:block leading-tight">
+                    <p class="text-gray-500 text-xs">Welcome,</p>
+                    <p class="font-semibold text-gray-800">Abisha</p>
                 </div>
             </div>
+            <button class="border border-gray-300 text-gray-600 px-5 py-2 rounded-lg text-sm font-medium hover:bg-gray-50">
+                Log Out
+            </button>
         </div>
+    </header>
 
-        <!-- ================= SUBJECT AREA 1: THEORY OF COMPUTATION ================= -->
-        <div id="section-toc" class="space-y-6">
-            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
-                <span class="text-xs font-bold text-blue-600 uppercase tracking-wide">Computer Engineering (BCT) • Year I / Part II</span>
-                <h1 class="text-3xl font-extrabold text-slate-900 mt-1">Theory of Computation</h1>
-                <p class="text-sm text-slate-500 mt-1">Course Code: <span class="font-mono bg-slate-100 px-1.5 py-0.5 rounded text-slate-700">CT 203</span> | Scheme: <span class="font-semibold text-slate-800">80 Marks</span> Board Exam</p>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div class="lg:col-span-2 bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden h-fit">
-                    <table class="w-full text-left border-collapse text-sm">
-                        <thead>
-                            <tr class="bg-slate-50 border-b border-slate-200 text-xs uppercase font-bold text-slate-500">
-                                <th class="p-4 w-12 text-center">Unit</th>
-                                <th class="p-4">Chapter Specification Blueprint</th>
-                                <th class="p-4 text-right w-32">Exam Marks</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-100">
-                            <tr class="hover:bg-slate-50/50 transition"><td class="p-4 font-mono text-slate-400 text-center">01</td><td class="p-4 font-semibold text-slate-900">Introduction to Finite Automata & Regular Languages</td><td class="p-4 text-right"><span class="bg-blue-50 text-blue-700 px-2 py-0.5 rounded text-xs font-bold">14 Marks</span></td></tr>
-                            <tr class="hover:bg-slate-50/50 transition"><td class="p-4 font-mono text-slate-400 text-center">02</td><td class="p-4 font-semibold text-slate-900">Context Free Languages & Pushdown Automata</td><td class="p-4 text-right"><span class="bg-blue-50 text-blue-700 px-2 py-0.5 rounded text-xs font-bold">16 Marks</span></td></tr>
-                            <tr class="hover:bg-slate-50/50 transition"><td class="p-4 font-mono text-slate-400 text-center">03</td><td class="p-4 font-semibold text-slate-900">Turing Machines & Computability Theory</td><td class="p-4 text-right"><span class="bg-blue-50 text-blue-700 px-2 py-0.5 rounded text-xs font-bold">18 Marks</span></td></tr>
-                            <tr class="hover:bg-slate-50/50 transition"><td class="p-4 font-mono text-slate-400 text-center">04</td><td class="p-4 font-semibold text-slate-900">Chomsky Hierarchy & Computational Complexity</td><td class="p-4 text-right"><span class="bg-blue-50 text-blue-700 px-2 py-0.5 rounded text-xs font-bold">12 Marks</span></td></tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div id="toc-sidebar-placeholder" class="space-y-6"></div>
-            </div>
-        </div>
-
-        <!-- ================= SUBJECT AREA 2: NUMERICAL METHODS ================= -->
-        <div id="section-nm" class="space-y-6 hidden">
-            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
-                <div>
-                    <span class="text-xs font-bold text-emerald-600 uppercase tracking-wide">Complete Merged Workbook Database Repository</span>
-                    <h1 class="text-3xl font-extrabold text-slate-900 mt-1">Numerical Methods</h1>
-                    <p class="text-sm text-slate-500 mt-1">Course Compilation Materials • Prepared By: <span class="font-semibold text-slate-700">Er. Rubi Kumari Mahato</span></p>
-                </div>
-            </div>
-
-            <!-- Full Grid Layout for the complete notes book docx framework -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div class="lg:col-span-2 space-y-6">
-                    
-                    <!-- MODULE 1: NON-LINEAR EQUATIONS -->
-                    <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-                        <div class="bg-slate-50 px-5 py-3 border-b border-slate-200 flex items-center justify-between">
-                            <h3 class="font-bold text-slate-900 text-sm">Unit 1: Numerical Solutions of Non-Linear Equations</h3>
-                        </div>
-                        <div class="p-5 space-y-4 text-xs leading-relaxed">
-                            <h4 class="font-bold text-slate-800 text-sm border-l-2 border-emerald-500 pl-2">Errors and Accuracy Criteria</h4>
-                            <ul class="list-disc pl-5 space-y-1 text-slate-600">
-                                <li><strong>Absolute Error:</strong> $E_a = |Approximate Value - True Value|$</li>
-                                <li><strong>Relative Error:</strong> $E_r = \frac{E_a}{|True Value|}$</li>
-                                <li><strong>Percentage Error:</strong> $E_p = E_r \times 100$</li>
-                                <li><strong>Stopping Conditions:</strong> Terminate calculations when successive iterations agree within standard error limit $|x_{n+1} - x_n| < \epsilon$ or $|f(x_n)| < \epsilon$.</li>
-                            </ul>
-
-                            <h4 class="font-bold text-slate-800 text-sm border-l-2 border-emerald-500 pl-2 pt-2">1.5 Newton-Raphson Method (Tangent Line Approximation)</h4>
-                            <p>Approximates the root of an equation using sequential localized tangent derivatives down until convergence:</p>
-                            <div class="bg-slate-50 p-2.5 rounded font-mono text-center text-slate-700 text-[11px]">
-                                $x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}, \text{ where } f'(x_n) \neq 0$
-                            </div>
-
-                            <div class="border border-slate-200 rounded-lg overflow-hidden">
-                                <div class="bg-slate-50 px-4 py-2 font-mono text-[11px] font-bold text-slate-700 border-b border-slate-200">Python Implementation for Newton-Raphson</div>
-                                <pre class="p-4 bg-slate-900 text-slate-200 text-[11px] overflow-x-auto code-font">
-def newton_raphson(f, df, x0, tol=1e-6, max_iter=100):
-    x = x0
-    for i in range(max_iter):
-        fx = f(x)
-        dfx = df(x)
-        if abs(dfx) < 1e-12: return None
-        x_new = x - fx / dfx
-        if abs(x_new - x) < tol:
-            return x_new
-        x = x_new
-    return None</pre>
-                            </div>
-
-                            <h4 class="font-bold text-slate-800 text-sm border-l-2 border-emerald-500 pl-2 pt-2">1.6 Fixed Point Iteration Method</h4>
-                            <p>Rearranges $f(x) = 0$ directly into the structural path map $x = g(x)$. The sequence converges systematically if and only if $|g'(x)| < 1$ within the neighborhood of the targeted calculation root.</p>
-                        </div>
-                    </div>
-
-                    <!-- MODULE 3: INTERPOLATION & CURVE FITTING -->
-                    <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-                        <div class="bg-slate-50 px-5 py-3 border-b border-slate-200">
-                            <h3 class="font-bold text-slate-900 text-sm">Unit 3: Interpolation and Least Square Curve Fitting</h3>
-                        </div>
-                        <div class="p-5 space-y-4 text-xs leading-relaxed">
-                            <h4 class="font-bold text-slate-800 text-sm border-l-2 border-emerald-500 pl-2">3.1 Finite Differences Framework</h4>
-                            <p>Calculates data sequences across equispaced step segments using specific forwarding, backward, and divided operators:</p>
-                            <ul class="list-disc pl-5 space-y-1 text-slate-600">
-                                <li><strong>Forward Operator ($\Delta$):</strong> $\Delta y_i = y_{i+1} - y_i$</li>
-                                <li><strong>Backward Operator ($\nabla$):</strong> $\nabla y_i = y_i - y_{i-1}$</li>
-                                <li><strong>Divided Difference Table (Unequal Spacing):</strong> Used to calculate coefficients without re-running parameters when adding new data points.</li>
-                            </ul>
-
-                            <h4 class="font-bold text-slate-800 text-sm border-l-2 border-emerald-500 pl-2 pt-2">3.2 Cubic Spline Curve Fitting</h4>
-                            <p>Ensures a completely continuous smooth fit across all coordinate transformations. Under natural boundary parameters, outermost limits are fixed to straight paths:</p>
-                            <div class="bg-slate-50 p-2.5 rounded font-mono text-center text-slate-700 text-[11px]">
-                                Natural Spline Boundary Conditions: $K_0 = 0, K_n = 0$
-                            </div>
-
-                            <h4 class="font-bold text-slate-800 text-sm border-l-2 border-emerald-500 pl-2 pt-2">3.3 Least Square Regression Ingestion</h4>
-                            <p>Minimizes deviation error blocks by solving linear equations systematically ($y = a + bx$):</p>
-                            <div class="bg-slate-50 p-3 rounded font-mono text-[11px] space-y-1 text-slate-700">
-                                <div>$b = \frac{n \sum x_i y_i - \sum x_i \sum y_i}{n \sum x_i^2 - (\sum x_i)^2}$</div>
-                                <div>$a = \frac{\sum y_i - b \sum x_i}{n}$</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- MODULE 5: ORDINARY DIFFERENTIAL EQUATIONS -->
-                    <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-                        <div class="bg-slate-50 px-5 py-3 border-b border-slate-200">
-                            <h3 class="font-bold text-slate-900 text-sm">Unit 5: Numerical Solution of Ordinary Differential Equations</h3>
-                        </div>
-                        <div class="p-5 space-y-4 text-xs leading-relaxed">
-                            <h4 class="font-bold text-slate-800 text-sm border-l-2 border-emerald-500 pl-2">5.1 Initial Value Problems (IVP)</h4>
-                            <p><strong>Euler's Method (1st Order RK-Method):</strong> Updates steps sequentially using the local tangent gradient path ($y_{new} = y + h \cdot f(x,y)$). Requires small step sizes ($h$) to minimize error divergence.</p>
-                            
-                            <p><strong>Runge-Kutta Fourth Order Method (RK4 Classical):</strong> Provides exceptionally high accuracy tracking using four specific weighted slope variations across each interval step:</p>
-                            <div class="bg-slate-50 p-3 rounded font-mono text-[11px] space-y-1 text-slate-600">
-                                <div>$k_1 = h \cdot f(x_n, y_n)$</div>
-                                <div>$k_2 = h \cdot f\left(x_n + \frac{h}{2}, y_n + \frac{k_1}{2}\right)$</div>
-                                <div>$k_3 = h \cdot f\left(x_n + \frac{h}{2}, y_n + \frac{k_2}{2}\right)$</div>
-                                <div>$k_4 = h \cdot f(x_n + h, y_n + k_3)$</div>
-                                <div class="text-slate-900 font-bold mt-1">$y_{n+1} = y_n + \frac{1}{6}(k_1 + 2k_2 + 2k_3 + k_4)$</div>
-                            </div>
-
-                            <h4 class="font-bold text-slate-800 text-sm border-l-2 border-emerald-500 pl-2 pt-2">5.2 Two-Point Boundary Value Problems (BVP)</h4>
-                            <ul class="list-disc pl-5 space-y-2 text-slate-600">
-                                <li><strong>The Shooting Method:</strong> Converts a boundary problem into an initial value problem by guessing the initial slope value ($y'(a) = m$), checking the boundary result at the opposite end, and refining guesses via linear interpolation until the target boundary is met.</li>
-                                <li><strong>Finite Difference Method:</strong> Replaces continuous analytical derivative equations with discrete central finite difference variations to solve problems across multi-point mesh matrices.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- MODULE 6: PARTIAL DIFFERENTIAL EQUATIONS -->
-                    <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-                        <div class="bg-slate-50 px-5 py-3 border-b border-slate-200">
-                            <h3 class="font-bold text-slate-900 text-sm">Unit 6: Solution of Partial Differential Equations (PDEs)</h3>
-                        </div>
-                        <div class="p-5 space-y-4 text-xs leading-relaxed">
-                            <h4 class="font-bold text-slate-800 text-sm border-l-2 border-emerald-500 pl-2">PDE Engineering Classifications</h4>
-                            <p>Categorized according to the standard second-order discriminant system ($B^2 - 4AC$):</p>
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                                <div class="bg-slate-50 p-3 rounded border border-slate-200 text-center">
-                                    <span class="font-bold text-slate-800 block text-xs">Elliptic ($B^2-4AC < 0$)</span>
-                                    <span class="text-[11px] text-slate-500">Laplace & Poisson Steady-State Models</span>
-                                </div>
-                                <div class="bg-slate-50 p-3 rounded border border-slate-200 text-center">
-                                    <span class="font-bold text-slate-800 block text-xs">Parabolic ($B^2-4AC = 0$)</span>
-                                    <span class="text-[11px] text-slate-500">1D Heat Equation Smoothing Diffusion</span>
-                                </div>
-                                <div class="bg-slate-50 p-3 rounded border border-slate-200 text-center">
-                                    <span class="font-bold text-slate-800 block text-xs">Hyperbolic ($B^2-4AC > 0$)</span>
-                                    <span class="text-[11px] text-slate-500">Time-dependent Wave Equation Travel</span>
-                                </div>
-                            </div>
-
-                            <h4 class="font-bold text-slate-800 text-sm border-l-2 border-emerald-500 pl-2 pt-2">6.4.1 1D Heat Equation Solutions</h4>
-                            <p><strong>Bendre-Schmidt Explicit Method:</strong> Models diffusion over a mesh grid network. To guarantee numerical system convergence and stability, the mesh ratio parameter ($\alpha$) must satisfy the following strict condition:</p>
-                            <div class="bg-slate-50 p-2.5 rounded font-mono text-center text-slate-800 text-[11px]">
-                                Stability Condition: $\alpha = \frac{c^2 \cdot \Delta t}{(\Delta x)^2} \le \frac{1}{2}$
-                            </div>
-                            <p><strong>Crank-Nicolson Implicit Scheme:</strong> An advanced, unconditionally stable method that removes severe time-step constraints by using a tridiagonal equation system across time segments.</p>
-                        </div>
-                    </div>
-
-                </div>
-                
-                <!-- Shared Sidebars Insertion Point -->
-                <div id="nm-sidebar-placeholder" class="space-y-6"></div>
-            </div>
-        </div>
-
+    <div class="text-center py-8">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-2">
+            Serene<span class="text-brand-green">Mind</span>
+        </h1>
+        <p class="text-gray-600 text-sm md:text-base">Intelligent Mental Health Monitoring System</p>
     </div>
 
-    <!-- Interface State Machine and Client Action Routing Logic -->
-    <script>
-        // Central In-Memory Resource Array Model
-        let state = {
-            isLoggedIn: false,
-            resources: [
-                { subject: 'toc', type: 'Official Syllabus', title: 'IOE New Course Curriculum PDF' },
-                { subject: 'toc', type: 'Past Question', title: '2081 Regular Board Solutions' },
-                { subject: 'nm', type: 'Workbook Asset', title: 'Students Workbook - Merged Document Copy' },
-                { subject: 'nm', type: 'Syllabus Guide', title: 'Unit 5 & 6 Full Differential Ingestion Specs' }
-            ]
-        };
-
-        function switchSubject(subjectCode) {
-            const tocSec = document.getElementById('section-toc');
-            const nmSec = document.getElementById('section-nm');
-            const btnToc = document.getElementById('btn-toc');
-            const btnNm = document.getElementById('btn-nm');
-
-            if(subjectCode === 'toc') {
-                tocSec.classList.remove('hidden');
-                nmSec.classList.add('hidden');
-                btnToc.className = "px-3 py-1.5 rounded-md bg-white text-slate-900 shadow-sm transition";
-                btnNm.className = "px-3 py-1.5 rounded-md hover:text-slate-900 transition";
-            } else {
-                tocSec.classList.add('hidden');
-                nmSec.classList.remove('hidden');
-                btnNm.className = "px-3 py-1.5 rounded-md bg-white text-emerald-900 shadow-sm transition";
-                btnToc.className = "px-3 py-1.5 rounded-md hover:text-slate-900 transition";
-            }
-            renderSidebars();
-        }
-
-        function simulateLogin() {
-            state.isLoggedIn = true;
-            document.getElementById('auth-status').innerHTML = `
-                <div class="flex items-center space-x-3 text-xs">
-                    <span class="text-slate-600">🎓 Welcome, <strong class="text-slate-900">Student Reviewer</strong></span>
-                    <button onclick="location.reload()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-2.5 py-1.5 rounded-lg font-medium transition">Logout</button>
-                </div>
-            `;
-            renderSidebars();
-        }
-
-        function renderSidebars() {
-            const currentSubject = document.getElementById('section-toc').classList.contains('hidden') ? 'nm' : 'toc';
-            const targetContainerId = currentSubject === 'toc' ? 'toc-sidebar-placeholder' : 'nm-sidebar-placeholder';
-            const alternativeContainerId = currentSubject === 'toc' ? 'nm-sidebar-placeholder' : 'toc-sidebar-placeholder';
-            
-            document.getElementById(alternativeContainerId).innerHTML = "";
-
-            const filteredResources = state.resources.filter(r => r.subject === currentSubject);
-            
-            let resourceCardsHTML = '';
-            filteredResources.forEach(res => {
-                resourceCardsHTML += `
-                    <div class="border border-slate-100 rounded-xl p-3.5 bg-slate-50/50 hover:border-slate-200 transition">
-                        <span class="text-[10px] uppercase font-extrabold tracking-wider text-amber-700 block mb-1">${res.type}</span>
-                        <h4 class="text-xs font-bold text-slate-800 mb-2.5">${res.title}</h4>
-                        <a href="#" class="block text-center bg-slate-900 hover:bg-slate-800 text-white text-xs font-medium py-1.5 px-3 rounded-lg transition shadow-sm">Download Resource</a>
+    <main class="flex-1 max-w-[1440px] mx-auto w-full px-4 lg:px-8 pb-12 flex flex-col lg:flex-row gap-6">
+        
+        <aside class="w-full lg:w-64 bg-white rounded-2xl p-4 card-shadow flex flex-col relative h-[max-content]">
+            <nav class="flex flex-col gap-2 relative z-10">
+                <a href="#" class="flex items-center justify-between bg-brand-green text-white px-4 py-3 rounded-xl text-sm font-medium">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-house w-5"></i> Dashboard
                     </div>
-                `;
-            });
+                    <span class="bg-white/20 text-xs px-2 py-0.5 rounded-full">Active</span>
+                </a>
+                <a href="#" class="flex items-center gap-3 text-gray-600 hover:bg-gray-50 px-4 py-3 rounded-xl text-sm font-medium transition-colors">
+                    <i class="fa-regular fa-pen-to-square w-5"></i> New Entry
+                </a>
+                <a href="#" class="flex items-center gap-3 text-gray-600 hover:bg-gray-50 px-4 py-3 rounded-xl text-sm font-medium transition-colors">
+                    <i class="fa-solid fa-clock-rotate-left w-5"></i> Journal History
+                </a>
+                <a href="#" class="flex items-center gap-3 text-gray-600 hover:bg-gray-50 px-4 py-3 rounded-xl text-sm font-medium transition-colors">
+                    <i class="fa-regular fa-comments w-5"></i> AI Chatbot
+                </a>
+                <a href="#" class="flex items-center gap-3 text-gray-600 hover:bg-gray-50 px-4 py-3 rounded-xl text-sm font-medium transition-colors">
+                    <i class="fa-solid fa-chart-line w-5"></i> Stress Trends
+                </a>
+                <a href="#" class="flex items-center gap-3 text-gray-600 hover:bg-gray-50 px-4 py-3 rounded-xl text-sm font-medium transition-colors">
+                    <i class="fa-solid fa-gear w-5"></i> Settings
+                </a>
+                <a href="#" class="flex items-center gap-3 text-gray-600 hover:bg-gray-50 px-4 py-3 rounded-xl text-sm font-medium transition-colors">
+                    <i class="fa-regular fa-circle-question w-5"></i> Help
+                </a>
+            </nav>
+            <div class="mt-12 flex justify-center opacity-70">
+                <i class="fa-brands fa-pagelines text-6xl text-green-200"></i>
+            </div>
+        </aside>
 
-            let portalFormHTML = '';
-            if (state.isLoggedIn) {
-                portalFormHTML = `
-                    <p class="text-[11px] text-slate-500 mb-3 leading-relaxed">Publish new PDF handouts into the live active view feed list below.</p>
-                    <div class="space-y-3">
-                        <div>
-                            <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Asset Category</label>
-                            <select id="asset_type" class="w-full text-xs p-2 border border-slate-200 rounded-lg bg-slate-50 focus:outline-none">
-                                <option value="Handwritten Note">Handwritten Note</option>
-                                <option value="Lab Guide">Lab Reference Guide</option>
-                                <option value="Past Question">Past Question Solution</option>
-                            </select>
+        <div class="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <div class="flex flex-col gap-6">
+                <div class="bg-white rounded-2xl p-6 card-shadow">
+                    <h3 class="font-bold text-gray-800 text-lg mb-6">Daily Wellness Snapshot</h3>
+                    <p class="text-center text-gray-500 text-sm mb-4">Mood Tracker</p>
+                    
+                    <div class="flex justify-between items-center mb-8 px-2">
+                        <div class="flex flex-col items-center gap-2">
+                            <div class="w-10 h-10 rounded-full bg-red-400 flex items-center justify-center text-xl shadow-sm border border-red-500/20">☹️</div>
+                            <span class="text-xs text-gray-500">Sad</span>
                         </div>
-                        <div>
-                            <label class="block text-[10px] font-bold text-slate-500 uppercase mb-1">Document Title Name</label>
-                            <input type="text" id="asset_title" required placeholder="e.g., Unit 5 RK4 Code Manual" class="w-full text-xs p-2 border border-slate-200 rounded-lg focus:outline-none">
+                        <div class="w-10 h-10 rounded-full bg-orange-300 flex items-center justify-center text-xl shadow-sm opacity-60">😕</div>
+                        <div class="w-10 h-10 rounded-full bg-yellow-200 flex items-center justify-center text-xl shadow-sm opacity-60">😐</div>
+                        <div class="w-10 h-10 rounded-full bg-green-200 flex items-center justify-center text-xl shadow-sm opacity-60">🙂</div>
+                        <div class="flex flex-col items-center gap-2">
+                            <div class="w-10 h-10 rounded-full bg-green-400 flex items-center justify-center text-xl shadow-sm opacity-60">😀</div>
+                            <span class="text-xs text-gray-500">Happy</span>
                         </div>
-                        <button onclick="addResource('${currentSubject}')" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-2 rounded-lg transition shadow-sm">Publish Resource</button>
                     </div>
-                `;
-            } else {
-                portalFormHTML = `
-                    <div class="bg-slate-50 border border-dashed border-slate-200 rounded-xl p-4 text-center">
-                        <p class="text-xs text-slate-500 leading-relaxed mb-3">You must be registered and authenticated as an authorized student contributor to upload materials.</p>
-                        <button onclick="simulateLogin()" class="inline-block text-xs text-blue-600 font-semibold hover:underline">Sign In Now &rarr;</button>
-                    </div>
-                `;
-            }
-
-            document.getElementById(targetContainerId).innerHTML = `
-                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
-                    <h3 class="font-bold text-slate-900 mb-3 text-sm flex items-center justify-between border-b border-slate-100 pb-2">
-                        <span>Course Reference Assets</span>
-                    </h3>
-                    <div id="resource-list" class="space-y-3">${resourceCardsHTML}</div>
+                    
+                    <p class="text-center text-gray-700 font-medium mb-6">How are you feeling today?</p>
+                    <button class="w-full bg-brand-green text-white py-3 rounded-xl font-medium hover:bg-opacity-90 transition-all">
+                        Check-in
+                    </button>
                 </div>
 
-                <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
-                    <h3 class="font-bold text-slate-900 text-sm mb-1 flex items-center">
-                        <span class="w-1.5 h-3.5 bg-emerald-500 rounded-full mr-2"></span> Community Upload Portal
-                    </h3>
-                    <div id="portal-box" class="mt-3">${portalFormHTML}</div>
-                </div>
-            `;
-        }
+                <div class="bg-white rounded-2xl p-6 card-shadow flex-1">
+                    <h3 class="font-bold text-gray-800 text-lg mb-4">AI Chatbot Assistant</h3>
+                    
+                    <div class="bg-brand-green rounded-t-xl rounded-bl-xl p-3 text-white text-sm mb-3 flex items-start gap-3 relative">
+                        <div class="w-6 h-6 bg-white/20 rounded-full flex items-center justify-center text-xs shrink-0"><i class="fa-solid fa-tree"></i></div>
+                        <p class="pt-0.5">Ask SereneMind</p>
+                        <button class="absolute top-3 right-3 text-white/70 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
 
-        function addResource(subj) {
-            const type = document.getElementById('asset_type').value;
-            const title = document.getElementById('asset_title').value;
+                    <div class="flex items-start gap-3 mb-6 px-2">
+                        <div class="w-6 h-6 bg-brand-light text-brand-green rounded-full flex items-center justify-center text-xs shrink-0"><i class="fa-solid fa-tree"></i></div>
+                        <div class="bg-gray-50 rounded-2xl rounded-tl-none p-3 text-sm text-gray-600 border border-gray-100">
+                            Ask you or feeling thas?
+                        </div>
+                    </div>
+
+                    <div class="relative mt-auto">
+                        <input type="text" placeholder="Ask SereneMind..." class="w-full border border-gray-200 rounded-full py-3 pl-4 pr-12 text-sm focus:outline-none focus:border-brand-green">
+                        <button class="absolute right-2 top-1.5 w-9 h-9 bg-brand-green text-white rounded-full flex items-center justify-center">
+                            <i class="fa-solid fa-paper-plane text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-6">
+                <div class="bg-white rounded-2xl p-6 card-shadow">
+                    <h3 class="font-bold text-gray-800 text-lg mb-6">Your Weekly Progress</h3>
+                    
+                    <div class="flex justify-center gap-6 text-xs text-gray-600 mb-6">
+                        <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#56a375]"></span> Mood</div>
+                        <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#f4b942]"></span> Stress</div>
+                        <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-[#4e8cb9]"></span> Anxiety</div>
+                    </div>
+
+                    <div class="relative w-full h-48 border-l border-b border-gray-200 text-xs text-gray-400">
+                        <div class="absolute -left-6 bottom-0">0</div>
+                        <div class="absolute -left-6 bottom-1/4">5</div>
+                        <div class="absolute -left-6 bottom-2/4">10</div>
+                        <div class="absolute -left-6 bottom-3/4">15</div>
+                        <div class="absolute -left-6 bottom-[100%]">20</div>
+                        <div class="absolute -left-6 -top-4">25</div>
+                        
+                        <div class="absolute w-full h-px bg-gray-100 bottom-1/4"></div>
+                        <div class="absolute w-full h-px bg-gray-100 bottom-2/4"></div>
+                        <div class="absolute w-full h-px bg-gray-100 bottom-3/4"></div>
+                        <div class="absolute w-full h-px bg-gray-100 top-0"></div>
+
+                        <svg class="absolute inset-0 h-full w-full overflow-visible" preserveAspectRatio="none">
+                            <polyline points="0,170 45,30 90,60 135,80 180,60 225,120 270,90" fill="none" stroke="#4e8cb9" stroke-width="2"/>
+                            <circle cx="0" cy="170" r="4" fill="#4e8cb9"/> <circle cx="45" cy="30" r="4" fill="#4e8cb9"/> <circle cx="90" cy="60" r="4" fill="#4e8cb9"/> <circle cx="135" cy="80" r="4" fill="#4e8cb9"/> <circle cx="180" cy="60" r="4" fill="#4e8cb9"/> <circle cx="225" cy="120" r="4" fill="#4e8cb9"/> <circle cx="270" cy="90" r="4" fill="#4e8cb9"/>
+
+                            <polyline points="0,95 45,45 90,40 135,25 180,20 225,60 270,30" fill="none" stroke="#f4b942" stroke-width="2"/>
+                            <circle cx="0" cy="95" r="4" fill="#f4b942"/> <circle cx="45" cy="45" r="4" fill="#f4b942"/> <circle cx="90" cy="40" r="4" fill="#f4b942"/> <circle cx="135" cy="25" r="4" fill="#f4b942"/> <circle cx="180" cy="20" r="4" fill="#f4b942"/> <circle cx="225" cy="60" r="4" fill="#f4b942"/> <circle cx="270" cy="30" r="4" fill="#f4b942"/>
+
+                            <polyline points="0,140 45,110 90,95 135,105 180,90 225,50 270,0" fill="none" stroke="#56a375" stroke-width="2"/>
+                            <circle cx="0" cy="140" r="4" fill="#56a375"/> <circle cx="45" cy="110" r="4" fill="#56a375"/> <circle cx="90" cy="95" r="4" fill="#56a375"/> <circle cx="135" cy="105" r="4" fill="#56a375"/> <circle cx="180" cy="90" r="4" fill="#56a375"/> <circle cx="225" cy="50" r="4" fill="#56a375"/> <circle cx="270" cy="0" r="4" fill="#56a375"/>
+                        </svg>
+
+                        <div class="absolute flex justify-between w-full -bottom-6 text-gray-500">
+                            <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-6 card-shadow flex-1">
+                    <h3 class="font-bold text-gray-800 text-lg mb-4">Personal Insights</h3>
+                    <div class="bg-brand-light rounded-xl p-4 flex gap-4 items-start border border-green-100/50">
+                        <div class="w-10 h-10 bg-brand-green text-white rounded-full flex items-center justify-center shrink-0 shadow-sm mt-1">
+                            <i class="fa-regular fa-lightbulb"></i>
+                        </div>
+                        <p class="text-sm text-gray-700 leading-relaxed">
+                            Stress elevated this week. Consider mindfulness, and oosisyren on receive form health mindfulness.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-6">
+                <div class="bg-white rounded-2xl p-6 card-shadow">
+                    <h3 class="font-bold text-gray-800 text-lg mb-6">Journal Feed</h3>
+                    <div class="flex justify-between text-xs text-gray-500 mb-4 px-2">
+                        <span>Recent</span>
+                        <span class="mr-6">Tags</span>
+                        <span>Mood</span>
+                    </div>
+
+                    <div class="flex flex-col gap-5 relative border-l-2 border-gray-100 ml-3 pl-5">
+                        
+                        <div class="relative">
+                            <div class="absolute -left-[27px] top-1 w-2.5 h-2.5 rounded-full bg-brand-green ring-4 ring-white"></div>
+                            <div class="flex justify-between items-start mb-1">
+                                <div class="flex items-center gap-2">
+                                    <span class="font-semibold text-gray-800 text-sm">Reflection</span>
+                                    <span class="bg-gray-100 text-gray-500 text-[10px] px-2 py-0.5 rounded-full">Oct 25</span>
+                                </div>
+                                <div class="w-6 h-6 rounded-full bg-green-200 flex items-center justify-center text-xs">🙂</div>
+                            </div>
+                            <p class="text-xs text-gray-500 leading-snug">Stressed with work deadlines, even their face and interesting m...</p>
+                        </div>
+                        
+                        <div class="relative pt-4 border-t border-gray-50">
+                            <div class="absolute -left-[27px] top-5 w-2.5 h-2.5 rounded-full bg-[#4e8cb9] ring-4 ring-white"></div>
+                            <div class="flex justify-between items-start mb-1">
+                                <div class="flex items-center gap-2">
+                                    <span class="font-semibold text-gray-800 text-sm">Reflection</span>
+                                    <span class="bg-gray-100 text-gray-500 text-[10px] px-2 py-0.5 rounded-full">Oct 36</span>
+                                </div>
+                                <div class="w-6 h-6 rounded-full bg-yellow-100 flex items-center justify-center text-xs">😐</div>
+                            </div>
+                            <p class="text-xs text-gray-500 leading-snug">Stressed with work deadlines, in each end-noan sensiting and leh...</p>
+                        </div>
+
+                        <div class="relative pt-4 border-t border-gray-50">
+                            <div class="absolute -left-[27px] top-5 w-2.5 h-2.5 rounded-full bg-red-400 ring-4 ring-white"></div>
+                            <div class="flex justify-between items-start mb-1">
+                                <div class="flex items-center gap-2">
+                                    <span class="font-semibold text-gray-800 text-sm">Reflection</span>
+                                    <span class="bg-gray-100 text-gray-500 text-[10px] px-2 py-0.5 rounded-full">Oct 36</span>
+                                </div>
+                                <div class="w-6 h-6 rounded-full bg-yellow-100 flex items-center justify-center text-xs">😐</div>
+                            </div>
+                            <p class="text-xs text-gray-500 leading-snug">Stressed with work deadlines, in and consistent conditiool meas...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-6 card-shadow flex-1">
+                    <h3 class="font-bold text-gray-800 text-lg mb-4">Quick Tools</h3>
+                    <div class="flex flex-col gap-3">
+                        <button class="w-full flex items-center gap-3 bg-brand-light text-gray-700 px-4 py-3 rounded-xl hover:bg-brand-green/20 transition-colors border border-green-100/50">
+                            <i class="fa-solid fa-leaf text-brand-green"></i>
+                            <span class="font-medium text-sm">Breathing Exercise</span>
+                        </button>
+                        <button class="w-full flex items-center gap-3 bg-brand-light text-gray-700 px-4 py-3 rounded-xl hover:bg-brand-green/20 transition-colors border border-green-100/50">
+                            <i class="fa-regular fa-file-lines text-brand-green"></i>
+                            <span class="font-medium text-sm">Quick Journal Entry</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
             
-            if(!title.trim()) return alert("Please type out a legitimate document name title.");
+        </div>
+    </main>
 
-            state.resources.push({ subject: subj, type: type, title: title });
-            renderSidebars();
-        }
-
-        window.onload = function() {
-            renderSidebars();
-        };
-    </script>
 </body>
 </html>
